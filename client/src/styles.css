@@ -1,0 +1,31 @@
+.box-shadow {
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-1 {
+  flex: 1 1 0%;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.font-bold {
+  font-weight: bold;
+}

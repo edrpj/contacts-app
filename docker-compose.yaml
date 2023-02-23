@@ -1,0 +1,55 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - 5432:5432
+    networks:
+      - shared-network
+    volumes: 
+      - pg_data:/var/lib/postgresql/data
+  api:
+    container_name: contacts_api
+    restart: unless-stopped 
+    image: contacts-api-prod:1.0.0
+    build:
+      context: api
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+    environment:
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_TARGET=postgres
+      - JWT_SECRET=65Dcf6bf0415YW06@97ba0ad796b2d86%83d09d02d3@6f5656871fc6*e5690fec
+      - APP_ENV=PRODUCTION
+    networks:
+      - shared-network
+  client:
+    container_name: contacts_client
+    restart: unless-stopped 
+    image: contacts-client-prod:1.0.0
+    build:
+      context: client 
+      dockerfile: Dockerfile
+    ports:
+      - 4173:4173
+    networks:
+        - shared-network
+    depends_on:
+      - api 
+
+networks:
+  shared-network:
+
+volumes:
+  pg_data: null

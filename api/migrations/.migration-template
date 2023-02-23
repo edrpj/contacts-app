@@ -1,0 +1,10 @@
+import { DataTypes, Sequelize } from 'sequelize';
+import { MigrationFn } from 'umzug';
+
+export const up: MigrationFn<Sequelize> = async ({ context }) => {
+  // Write your migration logic here.
+};
+
+export const down: MigrationFn<Sequelize> = async ({ context }) => {
+  // Write your down logic here.
+};
